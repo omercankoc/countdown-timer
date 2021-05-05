@@ -5,13 +5,16 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.NumberPicker
+import android.widget.Toast
+import android.os.CountDownTimer as CountDownTimer
 
 class CountdownTimerActivity : AppCompatActivity() {
 
     private lateinit var numberPickerHour : NumberPicker
     private lateinit var numberPickerMinute : NumberPicker
     private lateinit var numberPickerSecond : NumberPicker
-    private lateinit var buttonCountDownTimer : Button
+    private lateinit var buttonStart : Button
+    private lateinit var buttonStop : Button
 
     private var time : Int = 0
     private var hour : Int = 0
@@ -26,17 +29,20 @@ class CountdownTimerActivity : AppCompatActivity() {
 
         numberPickerHour.setOnValueChangedListener { _, _, set ->
             hour = set
-            time = timer(hour,minute,second)
+            time = collect(hour,minute,second)
+            println("$hour:$minute:$second")
         }
 
         numberPickerMinute.setOnValueChangedListener { _, _, set ->
             minute = set
-            time = timer(hour,minute,second)
+            time = collect(hour,minute,second)
+            println("$hour:$minute:$second")
         }
 
         numberPickerSecond.setOnValueChangedListener { _, _, set ->
             second = set
-            time = timer(hour,minute,second)
+            time = collect(hour,minute,second)
+            println("$hour:$minute:$second")
         }
     }
 
@@ -56,12 +62,14 @@ class CountdownTimerActivity : AppCompatActivity() {
         numberPickerSecond.maxValue = 59
         numberPickerSecond.value = 0
         numberPickerSecond.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
-        buttonCountDownTimer = findViewById(R.id.buttonCountDownTimer)
+        buttonStart = findViewById(R.id.buttonStart)
+        buttonStop = findViewById(R.id.buttonStop)
     }
 
-    private fun motionTimer(motionTime: Int){
+    // Toplam saniye verisini Saat:Dakika:Saniye cinsinen hesapla...
+    private fun separate(time : Int){
 
-        var second : Int = motionTime
+        var second : Int = time
         var minute : Int = second / 60
         second %= 60
         val hour : Int = minute / 60
@@ -71,11 +79,38 @@ class CountdownTimerActivity : AppCompatActivity() {
         numberPickerSecond.value = second
     }
 
-    private fun timer(hour : Int, minute : Int, second : Int) : Int {
-         return (hour * 3600) + (minute * 60) + second
+    // Saat:Dakika:Saniye cinsinden saniye cinsinde toplam sureyi hesapla...
+    private fun collect(hour : Int, minute : Int, second : Int) : Int {
+        return (hour * 3600) + (minute * 60) + second
     }
 
-    fun countDownTimer(view : View){
+    fun start(view : View){
+        var counter : Long = (time * 1000).toLong()
+        val countDownTimer = object  : CountDownTimer(counter,1000){
+            override fun onTick(millisUntilFinished: Long) {
+                time -= 1
+                separate(time)
+                counter -= 1000
+            }
 
+            override fun onFinish() {
+                Toast.makeText(applicationContext,"DONE!",Toast.LENGTH_LONG).show()
+            }
+        }.start()
+
+        buttonStop.setOnClickListener {
+            countDownTimer.cancel()
+            counter = 0
+
+            time = 0
+            hour = 0
+            minute = 0
+            second = 0
+
+            numberPickerHour.value = 0
+            numberPickerMinute.value = 0
+            numberPickerSecond.value = 0
+
+        }
     }
 }

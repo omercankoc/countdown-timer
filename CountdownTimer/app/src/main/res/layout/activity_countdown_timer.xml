@@ -46,17 +46,39 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/buttonCountDownTimer"
-        android:layout_width="150dp"
-        android:layout_height="75dp"
-        android:text="Countdown\nTimer"
-        android:textAllCaps="false"
-        android:onClick="countDownTimer"
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
-    </Button>
+
+        <Button
+            android:id="@+id/buttonStart"
+            android:layout_width="150dp"
+            android:layout_height="75dp"
+            android:text="Start"
+            android:textAllCaps="false"
+            android:layout_marginEnd="8dp"
+            android:onClick="start">
+        </Button>
+
+        <Button
+            android:id="@+id/buttonStop"
+            android:layout_width="150dp"
+            android:layout_height="75dp"
+            android:text="Stop"
+            android:textAllCaps="false"
+            android:layout_marginStart="8dp"
+            android:onClick="stop">
+        </Button>
+
+    </LinearLayout>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
