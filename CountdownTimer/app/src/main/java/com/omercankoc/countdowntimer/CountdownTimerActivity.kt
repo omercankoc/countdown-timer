@@ -29,19 +29,19 @@ class CountdownTimerActivity : AppCompatActivity() {
 
         numberPickerHour.setOnValueChangedListener { _, _, set ->
             hour = set
-            time = collect(hour,minute,second)
+            time = combineTime(hour,minute,second)
             println("$hour:$minute:$second")
         }
 
         numberPickerMinute.setOnValueChangedListener { _, _, set ->
             minute = set
-            time = collect(hour,minute,second)
+            time = combineTime(hour,minute,second)
             println("$hour:$minute:$second")
         }
 
         numberPickerSecond.setOnValueChangedListener { _, _, set ->
             second = set
-            time = collect(hour,minute,second)
+            time = combineTime(hour,minute,second)
             println("$hour:$minute:$second")
         }
     }
@@ -67,7 +67,7 @@ class CountdownTimerActivity : AppCompatActivity() {
     }
 
     // Toplam saniye verisini Saat:Dakika:Saniye cinsinen hesapla...
-    private fun separate(time : Int){
+    private fun splitTime(time : Int){
 
         var second : Int = time
         var minute : Int = second / 60
@@ -80,7 +80,7 @@ class CountdownTimerActivity : AppCompatActivity() {
     }
 
     // Saat:Dakika:Saniye cinsinden saniye cinsinde toplam sureyi hesapla...
-    private fun collect(hour : Int, minute : Int, second : Int) : Int {
+    private fun combineTime(hour : Int, minute : Int, second : Int) : Int {
         return (hour * 3600) + (minute * 60) + second
     }
 
@@ -89,7 +89,7 @@ class CountdownTimerActivity : AppCompatActivity() {
         val countDownTimer = object  : CountDownTimer(counter,1000){
             override fun onTick(millisUntilFinished: Long) {
                 time -= 1
-                separate(time)
+                splitTime(time)
                 counter -= 1000
             }
 
