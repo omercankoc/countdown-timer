@@ -16,6 +16,7 @@ val countDownTimer = object  : CountDownTimer(counter,1000){
     }
 }.start()
 ```
+
 <p>onTick(milisUntilFinished : Long) -> while the countdown continues...</p>
 <p>onFinish() -> when the countdown is over.</p>
 
