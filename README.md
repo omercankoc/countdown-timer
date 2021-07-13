@@ -1,4 +1,4 @@
-# Countdown-Timer
+## Countdown-Timer
 <p>Schedule a countdown until a time in the future, with regular notifications on intervals along the way.</p>
 
 ### Defining and configuring a Countdown-Timer Object:
@@ -28,6 +28,7 @@ hour = 0
 minute = 0
 second = 0
 ```
+
 ### Calculate Second from HH:MM:SS:
 ```kotlin
 private fun combineTime(hour : Int, minute : Int, second : Int) : Int {
