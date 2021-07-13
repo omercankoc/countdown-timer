@@ -28,14 +28,14 @@ hour = 0
 minute = 0
 second = 0
 ```
-### Calculate HH:MM:SS:
+### Calculate Second from HH:MM:SS:
 ```kotlin
 private fun combineTime(hour : Int, minute : Int, second : Int) : Int {
     return (hour * 3600) + (minute * 60) + second
 }
 ```
 
-### Calculate Second from HH:MM:SS:
+### Calculate HH:MM:SS from Second:
 ```kotlin
 private fun splitTime(time : Int) {
     var second : Int = time
