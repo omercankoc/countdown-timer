@@ -1,5 +1,6 @@
-## Countdown-Timer
-<p>Schedule a countdown until a time in the future, with regular notifications on intervals along the way.</p>
+# Countdown-Timer
+
+Schedule a countdown until a time in the future, with regular notifications on intervals along the way.
 
 ### Defining and configuring a Countdown-Timer Object:
 ```kotlin
